@@ -385,3 +385,46 @@ the chat panel, because in each case the agent recovered and said something sens
 
 Hitting the tool cap also used to return a 502; `main.py` now answers in character
 instead, since a shopper who asked a fair question shouldn't see a gateway error.
+
+---
+
+## Problem 13 — Push to GitHub and submit the URL
+
+**Prompt 1:**
+
+> Okay now for Problem 13: "Push to Gitlab and submit the URL". Please put my code in a
+> folder named hw4 and push it to a public Gitlab repository. I need to then take the repo
+> URL to Canvas myself so that the graders can open the link and clone. Make sure to not put
+> my real .env, campus_customs.db, or product images in the Github repo. Use gitignore.
+> Include .env.example with placeholders only. The expected file layout is as follows. and
+> then the local-only data pack (not in git). The agent itself is four files under backend/:
+> prompts/prompt.md, agent.py, tools.py, and models.py. README.md should explain how to run
+> the front end and back end after placing the data pack.
+
+**Prompt 2 (clarification):**
+
+> sorry i meant Github!
+
+**Why a follow-up was needed:** the original prompt said GitLab in the problem title but
+"the Github repo" in the body, and this machine had GitHub authenticated with no GitLab
+credentials — so the platform had to be settled before anything was published.
+
+**Result:** <https://github.com/kelly-enright/campus-customs-hw4> — public, 68 files, one
+commit.
+
+The code was assembled into a clean `hw4/` folder matching the required layout, with
+`requirements.txt` moved from `backend/` to the `hw4/` root. `.gitignore` excludes `.env`,
+`data/` (the database and all 102 product images), `backend/.session_secret`, `.venv/`,
+`node_modules/`, and `__pycache__/`. `.env.example` ships placeholders only.
+
+Verified before and after publishing, rather than assumed:
+
+- The real `PORTKEY_API_KEY` value was grepped for across every staged file — absent.
+- No `.env`, `.db`, `.jpg`, session secret, cache, or `node_modules` in the commit.
+- `output/audit_trail.json` was reviewed message by message: 12 test prompts, no personal
+  data, actors recorded as `guest` / `user:3` rather than by email.
+- The public repo was cloned into a clean directory, the data pack dropped in per the
+  README, and the backend booted from that clone: health `{"status":"ok","products":102}`,
+  images served at 200, all six category counts correct.
+- `git status` in that clone was empty after adding the data pack, confirming graders
+  cannot accidentally commit the database back.
