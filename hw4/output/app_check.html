@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Campus Customs — Site Testing (App Check)</title>
+<link
+  href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Oswald:wght@400;600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap"
+  rel="stylesheet" />
+<style>
+  :root {
+    --paper: #f6efdf;
+    --cream: #fffaf0;
+    --ink: #16283d;
+    --ink-soft: #52616f;
+    --crimson: #96301f;
+    --gold: #c8912f;
+    --edge: #e2d4b7;
+    --display: "Alfa Slab One", Georgia, serif;
+    --condensed: "Oswald", "Helvetica Neue", Arial, sans-serif;
+    --body: "Source Serif 4", Georgia, serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    line-height: 1.6;
+  }
+
+  header {
+    background: var(--ink);
+    border-bottom: 4px solid var(--gold);
+    background-image: radial-gradient(rgba(255,255,255,.07) 1px, transparent 1px);
+    background-size: 6px 6px;
+    padding: 2rem 0;
+  }
+
+  .wrap { width: min(1080px, 100% - 3rem); margin: 0 auto; }
+
+  header h1 {
+    font-family: var(--display);
+    color: var(--cream);
+    text-transform: uppercase;
+    font-size: clamp(1.8rem, 4vw, 2.7rem);
+    margin: 0 0 .35rem;
+    line-height: 1.05;
+  }
+
+  header p { color: rgba(246,239,223,.82); margin: 0; }
+
+  .eyebrow {
+    font-family: var(--condensed);
+    text-transform: uppercase;
+    letter-spacing: .22em;
+    font-size: .74rem;
+    font-weight: 600;
+    color: var(--gold);
+    margin: 0 0 .5rem;
+  }
+
+  main { padding: 2.5rem 0 4rem; }
+
+  .meta {
+    background: var(--cream);
+    border: 1px solid var(--edge);
+    border-left: 5px solid var(--crimson);
+    padding: 1rem 1.25rem;
+    margin-bottom: 2.5rem;
+    font-size: .94rem;
+  }
+
+  .meta dl { display: grid; grid-template-columns: 170px 1fr; gap: .35rem 1rem; margin: 0; }
+  .meta dt { font-family: var(--condensed); text-transform: uppercase; letter-spacing: .06em; font-size: .8rem; color: var(--ink-soft); }
+  .meta dd { margin: 0; }
+
+  section { margin-bottom: 3.5rem; }
+
+  h2 {
+    font-family: var(--display);
+    text-transform: uppercase;
+    font-size: clamp(1.3rem, 2.6vw, 1.8rem);
+    margin: 0 0 .25rem;
+    padding-bottom: .6rem;
+    border-bottom: 3px double var(--ink);
+    line-height: 1.15;
+  }
+
+  h2 .num { color: var(--crimson); }
+
+  .asked {
+    font-family: var(--condensed);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    font-size: .8rem;
+    color: var(--ink-soft);
+    margin: .75rem 0 1rem;
+  }
+
+  .asked b { color: var(--crimson); font-weight: 600; }
+
+  figure { margin: 0; }
+
+  figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--edge);
+    box-shadow: 0 6px 18px rgba(22,40,61,.16);
+    background: var(--cream);
+  }
+
+  figcaption {
+    margin-top: .85rem;
+    background: var(--cream);
+    border: 1px solid var(--edge);
+    border-left: 5px solid var(--gold);
+    padding: .9rem 1.1rem;
+    font-size: .96rem;
+  }
+
+  figcaption strong { color: var(--crimson); }
+
+  .verdict {
+    display: inline-block;
+    font-family: var(--condensed);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    font-size: .72rem;
+    font-weight: 600;
+    background: #1a6b3f;
+    color: #fff;
+    padding: .2rem .6rem;
+    margin-left: .5rem;
+    vertical-align: 3px;
+  }
+
+  footer {
+    border-top: 3px double var(--ink);
+    padding-top: 1.25rem;
+    font-size: .88rem;
+    color: var(--ink-soft);
+  }
+
+  code {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    background: #efe4cd;
+    padding: .1rem .35rem;
+    font-size: .88em;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="eyebrow">Homework 4 · Problem 11</p>
+    <h1>Campus Customs — Site Testing</h1>
+    <p>Three checks run against the live site, with screenshots taken from the running app.</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="meta">
+    <dl>
+      <dt>What was tested</dt>
+      <dd>The running site — React + Vite front end, FastAPI back end, PydanticAI agent.</dd>
+      <dt>Data source</dt>
+      <dd><code>data/campus_customs.db</code> — 102 products, 612 inventory rows.</dd>
+      <dt>How captured</dt>
+      <dd>Scripted browser session against the live app; no screenshots were staged or edited.</dd>
+      <dt>Signed in?</dt>
+      <dd>No — all three checks were run as a guest, so nothing depends on a saved session.</dd>
+    </dl>
+  </div>
+
+  <!-- ============================================================ CHECK 1 -->
+  <section>
+    <h2><span class="num">Check 1.</span> Chat reports real stock and price from the database
+      <span class="verdict">Passed</span>
+    </h2>
+
+    <p class="asked">Asked Dan, from the product's own page: <b>“Is this in stock in XS, and what does it cost?”</b></p>
+
+    <figure>
+      <img src="app_check_images/inventory.png"
+           alt="The Baseball Left Chest Crewneck product page with the chat panel open. The page shows XS as sold out and a price of $58.00; the assistant replies that it is sold out in XS, costs $58.00, and is available in S, M, L and XXL." />
+      <figcaption>
+        Dan answers <strong>“It's sold out in XS. The price is $58.00, and it's still available in
+        S, M, L, and XXL.”</strong> — which matches the database exactly (XS&nbsp;=&nbsp;0,
+        XL&nbsp;=&nbsp;0, price&nbsp;=&nbsp;58.00). The page behind it independently shows the same
+        thing: XS struck through as sold out, and $58.00 in the heading. This proves the assistant
+        is reading live inventory rather than guessing or inventing a number.
+      </figcaption>
+    </figure>
+  </section>
+
+  <!-- ============================================================ CHECK 2 -->
+  <section>
+    <h2><span class="num">Check 2.</span> A category question puts matching product cards on the page
+      <span class="verdict">Passed</span>
+    </h2>
+
+    <p class="asked">Asked Dan, from the Home page: <b>“What hoodies do you have?”</b></p>
+
+    <figure>
+      <img src="app_check_images/chat_search_cards.png"
+           alt="The Products page showing a highlighted band headed '4 matches for What hoodies do you have?' with four hoodie cards, each with image, name, description and a $68.00 price, above the full 102-item catalogue." />
+      <figcaption>
+        The question was asked on the Home page; the site moved to the catalogue and rendered
+        <strong>“4 matches for ‘What hoodies do you have?’”</strong> as real product cards — image,
+        name, short description, and price. All four are genuine $68.00 hoodies from the database.
+        The cards are the same component the catalogue uses, so each one opens the full product page
+        when clicked.
+      </figcaption>
+    </figure>
+  </section>
+
+  <!-- ============================================================ CHECK 3 -->
+  <section>
+    <h2><span class="num">Check 3.</span> Usability feature from Problem 9 — the shopping bag
+      <span class="verdict">Passed</span>
+    </h2>
+
+    <p class="asked">Added two different items, in two different sizes, from two product pages.</p>
+
+    <figure>
+      <img src="app_check_images/usability_bag.png"
+           alt="The bag page listing the Baseball Left Chest Crewneck in size L at $58.00 and the 2025 Yale vs Harvard T Shirt in size XS at $32.00, with quantity steppers and a $90.00 subtotal. The nav bar shows a bag count of 2." />
+      <figcaption>
+        “Add to bag” was a dead button before Problem 9. The bag now holds items
+        <strong>per size</strong> (L crewneck, XS t-shirt), shows a live count in the nav, and totals
+        correctly: <strong>$58.00 + $32.00 = $90.00</strong>. Quantities are capped at real stock, and
+        the bag is saved to the browser so it survives a reload. Checkout is deliberately disabled —
+        there is no orders table in this assignment, and a button that pretended to take payment
+        would be dishonest.
+      </figcaption>
+    </figure>
+  </section>
+
+  <footer>
+    <p>
+      To reproduce: start the API with <code>uvicorn main:app --reload --port 8000</code> from
+      <code>backend/</code>, start the site with <code>npm run dev --prefix frontend</code>, then ask
+      the assistant the questions quoted above. Screenshots live in
+      <code>output/app_check_images/</code>.
+    </p>
+  </footer>
+
+</main>
+</body>
+</html>

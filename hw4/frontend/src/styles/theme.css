@@ -1,0 +1,1346 @@
+/* ===========================================================================
+   Campus Customs — "Game Day Program, 1936"
+
+   The storefront is dressed as a vintage football program: aged paper, heavy
+   slab headlines, condensed numerals, halftone dots, and rule lines. Navy ink
+   and oxblood on cream, with brass accents.
+   =========================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Oswald:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap");
+
+:root {
+  /* --- ink & paper ------------------------------------------------------ */
+  --paper: #f6efdf;
+  --paper-deep: #efe4cd;
+  --paper-edge: #e2d4b7;
+  --ink: #16283d;
+  --ink-soft: #52616f;
+  --navy: #16283d;
+  --navy-light: #24405f;
+  --crimson: #96301f;
+  --crimson-light: #b8432e;
+  --gold: #c8912f;
+  --gold-light: #e0ae4d;
+  --cream: #fffaf0;
+
+  /* legacy aliases so older rules keep working */
+  --navy-dark: #0d1b2b;
+  --accent: var(--gold);
+  --muted: var(--ink-soft);
+  --line: #d9c9a8;
+  --surface: var(--cream);
+  --shell: var(--paper);
+
+  /* --- Dan -------------------------------------------------------------- */
+  --dan-fur: #f0e2c4;
+  --dan-shade: #d8c49b;
+  --dan-muzzle: #fdf6e6;
+
+  --radius: 4px;
+  --radius-lg: 6px;
+  --shadow-sm: 0 1px 0 rgba(22, 40, 61, 0.14);
+  --shadow-md: 0 6px 18px rgba(22, 40, 61, 0.16);
+  --shadow-lg: 0 20px 48px rgba(13, 27, 43, 0.3);
+
+  --font-display: "Alfa Slab One", Georgia, serif;
+  --font-condensed: "Oswald", "Helvetica Neue", sans-serif;
+  --font-body: "Source Serif 4", Georgia, serif;
+
+  color-scheme: light;
+}
+
+/* Paper grain — a faint fibrous noise over the whole page. */
+body {
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(200, 145, 47, 0.07) 0 22%, transparent 22%),
+    radial-gradient(circle at 86% 72%, rgba(150, 48, 31, 0.05) 0 26%, transparent 26%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  font-family: var(--font-body);
+  color: var(--ink);
+  line-height: 1.65;
+}
+
+/* --- typography --------------------------------------------------------- */
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  color: var(--navy);
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+}
+
+.eyebrow {
+  font-family: var(--font-condensed);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.72rem;
+  color: var(--crimson);
+}
+
+/* Double rule under section headings — straight off a program page. */
+.section-head {
+  border-bottom: 3px double var(--ink);
+  padding-bottom: 0.6rem;
+}
+
+.section-head h2 {
+  font-size: 1.9rem;
+  text-transform: uppercase;
+}
+
+.section-head a {
+  font-family: var(--font-condensed);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.82rem;
+  color: var(--crimson);
+  text-decoration: none;
+}
+
+.section-head a:hover {
+  text-decoration: underline;
+}
+
+.page-header {
+  border-bottom: 3px double var(--ink);
+  padding-bottom: 1.25rem;
+}
+
+.page-header h1 {
+  text-transform: uppercase;
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+}
+
+/* --- nav ---------------------------------------------------------------- */
+
+.nav {
+  background: var(--navy);
+  border-bottom: 4px solid var(--gold);
+  /* halftone dots in the masthead */
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.07) 1px,
+    transparent 1px
+  );
+  background-size: 6px 6px;
+}
+
+.nav-brand strong {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  letter-spacing: 0.01em;
+  color: var(--cream);
+}
+
+.nav-brand span {
+  font-family: var(--font-condensed);
+  letter-spacing: 0.26em;
+  color: var(--gold-light);
+}
+
+.nav-link {
+  font-family: var(--font-condensed);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  font-size: 0.86rem;
+  border-radius: 2px;
+}
+
+.nav-link.nav-cta {
+  background: var(--crimson);
+  color: var(--cream);
+  border: 1px solid var(--crimson-light);
+}
+
+.nav-link.nav-cta:hover {
+  background: var(--crimson-light);
+  color: var(--cream);
+}
+
+.nav-greeting {
+  font-family: var(--font-condensed);
+  letter-spacing: 0.06em;
+}
+
+.bag-count {
+  background: var(--gold);
+  color: var(--navy);
+  font-family: var(--font-condensed);
+}
+
+/* --- hero --------------------------------------------------------------- */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(200, 145, 47, 0.22), transparent 55%),
+    linear-gradient(160deg, #24405f 0%, #0d1b2b 100%);
+  border-bottom: 6px double var(--gold);
+}
+
+.hero::after {
+  /* halftone wash over the hero */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(246, 239, 223, 0.09) 1.5px, transparent 1.5px);
+  background-size: 9px 9px;
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+}
+
+.hero h1 {
+  color: var(--cream);
+  text-transform: uppercase;
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  text-shadow: 3px 3px 0 rgba(150, 48, 31, 0.55);
+}
+
+.hero p {
+  color: rgba(246, 239, 223, 0.86);
+  font-size: 1.12rem;
+}
+
+.hero .eyebrow {
+  color: var(--gold-light);
+}
+
+/* Dan, watermarked behind the hero copy */
+.hero-dan {
+  position: absolute;
+  right: -3%;
+  bottom: -14%;
+  width: clamp(260px, 34vw, 460px);
+  color: rgba(246, 239, 223, 0.07);
+  z-index: 1;
+  pointer-events: none;
+  animation: dan-drift 9s ease-in-out infinite;
+}
+
+@keyframes dan-drift {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-12px) rotate(1deg); }
+}
+
+/* --- buttons ------------------------------------------------------------ */
+
+.btn {
+  font-family: var(--font-condensed);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  border-radius: 2px;
+}
+
+.btn-primary {
+  background: var(--gold);
+  color: var(--navy);
+  border: 1px solid #a9761f;
+  box-shadow: 3px 3px 0 rgba(13, 27, 43, 0.5);
+}
+
+.btn-primary:hover {
+  background: var(--gold-light);
+}
+
+.btn-ghost {
+  border: 1px solid rgba(246, 239, 223, 0.55);
+  color: var(--cream);
+}
+
+.btn-navy {
+  background: var(--crimson);
+  color: var(--cream);
+  border: 1px solid #7a2416;
+  box-shadow: 3px 3px 0 rgba(22, 40, 61, 0.26);
+}
+
+.btn-navy:hover {
+  background: var(--crimson-light);
+}
+
+.btn-navy:disabled {
+  background: #b9ac93;
+  border-color: #a2957c;
+  box-shadow: none;
+}
+
+/* --- value props as ticket stubs ---------------------------------------- */
+
+.value-prop {
+  background: var(--cream);
+  border: 1px solid var(--paper-edge);
+  border-left: 5px solid var(--crimson);
+  border-radius: 2px;
+  position: relative;
+  box-shadow: var(--shadow-sm);
+}
+
+.value-prop h3 {
+  font-family: var(--font-condensed);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 1.02rem;
+}
+
+/* --- product cards ------------------------------------------------------ */
+
+.product-card {
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  background: var(--cream);
+  border: 1px solid var(--paper-edge);
+  border-radius: 2px;
+  box-shadow: var(--shadow-sm);
+  /* The slow curve here is the *settle* when the cursor leaves. */
+  transition: transform 0.42s cubic-bezier(0.2, 0.7, 0.3, 1), box-shadow 0.22s ease;
+  will-change: transform;
+}
+
+.product-card:hover {
+  /* Lifts off the table and tips toward the cursor — ProductCard.tsx writes the two
+     angles on mousemove. */
+  transform: perspective(900px) translateY(-6px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+  box-shadow: var(--shadow-md);
+  /* While following the cursor the transition has to be near-instant, or the card lags
+     behind the pointer and feels like it's on elastic. */
+  transition: transform 0.08s linear, box-shadow 0.22s ease;
+}
+
+/* Uniform tile behind every photo — the source images have mixed black and
+   white backgrounds, which made the grid look patchy. */
+.product-card-image {
+  background:
+    radial-gradient(circle at 50% 38%, #ffffff 0%, var(--paper-deep) 74%, var(--paper-edge) 100%);
+  border-bottom: 1px solid var(--paper-edge);
+  overflow: hidden;
+}
+
+.product-card-image img {
+  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.3, 1);
+  padding: 6%;
+}
+
+.product-card:hover .product-card-image img {
+  transform: scale(1.07);
+}
+
+.product-card-body h3 {
+  font-family: var(--font-condensed);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.product-card-desc {
+  font-size: 0.86rem;
+  color: var(--ink-soft);
+}
+
+.product-price {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--crimson);
+}
+
+.stock-badge {
+  font-family: var(--font-condensed);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-radius: 2px;
+}
+
+.stock-badge-low {
+  background: var(--crimson);
+}
+
+/* colour swatches + size pips on the cards */
+.card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: 0.15rem;
+}
+
+.swatches {
+  display: flex;
+  gap: 4px;
+}
+
+.swatch {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  border: 1px solid rgba(22, 40, 61, 0.28);
+}
+
+.size-pips {
+  display: flex;
+  gap: 3px;
+}
+
+.pip {
+  font-family: var(--font-condensed);
+  font-size: 0.6rem;
+  font-weight: 600;
+  line-height: 1;
+  padding: 2px 3.5px;
+  border-radius: 2px;
+  color: var(--ink-soft);
+  background: var(--paper-deep);
+  border: 1px solid var(--paper-edge);
+}
+
+.pip-out {
+  opacity: 0.35;
+  text-decoration: line-through;
+}
+
+/* "Dan's pick" ribbon */
+.dans-pick {
+  position: absolute;
+  top: 10px;
+  right: -6px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px 3px 7px;
+  background: var(--crimson);
+  color: var(--cream);
+  font-family: var(--font-condensed);
+  font-size: 0.64rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  box-shadow: 2px 2px 0 rgba(22, 40, 61, 0.3);
+}
+
+.dans-pick::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -5px;
+  border-top: 5px solid #5e1c11;
+  border-right: 6px solid transparent;
+}
+
+.card-wrap {
+  position: relative;
+}
+
+/* --- filters ------------------------------------------------------------ */
+
+.chip,
+.sort-control,
+.sort-control select,
+.search-input {
+  font-family: var(--font-condensed);
+  border-radius: 2px;
+}
+
+.chip {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.78rem;
+  border: 1px solid var(--line);
+  background: var(--cream);
+}
+
+.chip.active {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: var(--cream);
+}
+
+.result-count {
+  font-family: var(--font-condensed);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.8rem;
+}
+
+/* --- detail page -------------------------------------------------------- */
+
+.detail-image {
+  background:
+    radial-gradient(circle at 50% 35%, #ffffff 0%, var(--paper-deep) 78%, var(--paper-edge) 100%);
+  border: 1px solid var(--paper-edge);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+/* zoom-on-hover, as if leaning in over the counter */
+.detail-image img {
+  transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+.detail-image:hover img {
+  transform: scale(1.13);
+}
+
+.detail-body h1 {
+  text-transform: uppercase;
+}
+
+.detail-price {
+  font-family: var(--font-display);
+  color: var(--crimson);
+  font-size: 1.7rem;
+}
+
+.detail-section h2 {
+  font-family: var(--font-condensed);
+  letter-spacing: 0.18em;
+  color: var(--crimson);
+}
+
+.size-option {
+  font-family: var(--font-condensed);
+  border-radius: 2px;
+  background: var(--cream);
+}
+
+.size-option.selected {
+  background: var(--navy);
+  border-color: var(--navy);
+}
+
+.tag {
+  font-family: var(--font-condensed);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.7rem;
+  background: var(--paper-deep);
+  border: 1px solid var(--paper-edge);
+  color: var(--ink-soft);
+  border-radius: 2px;
+}
+
+.back-link {
+  font-family: var(--font-condensed);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.78rem;
+  color: var(--crimson);
+}
+
+/* --- auth cards & bag --------------------------------------------------- */
+
+.auth-card,
+.bag-item,
+.bag-summary {
+  background: var(--cream);
+  border: 1px solid var(--paper-edge);
+  border-radius: 2px;
+}
+
+.auth-card h1,
+.bag-summary h2 {
+  text-transform: uppercase;
+}
+
+.field label,
+.bag-summary-row,
+.bag-item-meta {
+  font-family: var(--font-condensed);
+}
+
+.bag-summary-row strong,
+.bag-item-line strong {
+  font-family: var(--font-display);
+  color: var(--crimson);
+}
+
+.bag-item-name {
+  font-family: var(--font-condensed);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+/* --- empty states with Dan ---------------------------------------------- */
+
+.empty-state {
+  text-align: center;
+  padding: 2.5rem 1rem 3rem;
+}
+
+.empty-state .dan {
+  margin: 0 auto 0.5rem;
+}
+
+.empty-state h2 {
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+
+.empty-state p {
+  color: var(--ink-soft);
+  margin: 0 auto 1.25rem;
+  max-width: 42ch;
+}
+
+/* --- paw-print loading trail -------------------------------------------- */
+
+.paw-trail {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--crimson);
+}
+
+.paw {
+  opacity: 0;
+  animation: paw-step 1.4s ease-in-out infinite;
+}
+
+.paw:nth-child(even) {
+  transform: translateY(5px) rotate(9deg);
+}
+
+.paw:nth-child(odd) {
+  transform: translateY(-3px) rotate(-9deg);
+}
+
+@keyframes paw-step {
+  0% { opacity: 0; }
+  25% { opacity: 1; }
+  75% { opacity: 0.25; }
+  100% { opacity: 0; }
+}
+
+.state-msg {
+  font-family: var(--font-condensed);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.86rem;
+}
+
+.loading-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 3rem 1rem;
+}
+
+/* --- footer ------------------------------------------------------------- */
+
+.footer {
+  background: var(--navy);
+  border-top: 4px solid var(--gold);
+  color: rgba(246, 239, 223, 0.72);
+  font-family: var(--font-condensed);
+  letter-spacing: 0.04em;
+  /* The peeking pups are positioned against this. */
+  position: relative;
+}
+
+/* --- motion: scroll reveal + page transitions --------------------------- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+.reveal.is-visible {
+  animation: reveal-up 0.62s cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
+}
+
+@keyframes reveal-up {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.page-transition {
+  animation: page-in 0.4s ease-out both;
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+/* --- chat: Handsome Dan at the counter ---------------------------------- */
+
+.chat-launcher {
+  background: var(--cream);
+  border: 2px solid var(--navy);
+  color: var(--navy);
+  font-family: var(--font-condensed);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-radius: 999px;
+  padding: 0.5rem 1.15rem 0.5rem 0.55rem;
+  box-shadow: 4px 4px 0 rgba(22, 40, 61, 0.35);
+}
+
+.chat-launcher:hover {
+  background: var(--gold-light);
+  transform: translateY(-2px);
+}
+
+.chat-launcher .dan {
+  flex-shrink: 0;
+}
+
+/* Dan's ears twitch while he dozes on the launcher */
+.dan-sleeping .dan-ear {
+  animation: ear-twitch 4.5s ease-in-out infinite;
+  transform-origin: 60px 46px;
+}
+
+@keyframes ear-twitch {
+  0%, 88%, 100% { transform: rotate(0deg); }
+  92% { transform: rotate(-5deg); }
+  96% { transform: rotate(3deg); }
+}
+
+.dan-zzz {
+  animation: zzz-float 2.6s ease-in-out infinite;
+}
+
+@keyframes zzz-float {
+  0%, 100% { opacity: 0.25; transform: translateY(2px); }
+  50% { opacity: 1; transform: translateY(-3px); }
+}
+
+.dan-thinking {
+  animation: dan-ponder 1.8s ease-in-out infinite;
+}
+
+@keyframes dan-ponder {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-4deg); }
+}
+
+.chat-panel {
+  background: var(--paper);
+  border: 2px solid var(--navy);
+  border-radius: 6px;
+  box-shadow: var(--shadow-lg);
+}
+
+.chat-header {
+  background: var(--navy);
+  border-bottom: 3px solid var(--gold);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+  background-size: 6px 6px;
+}
+
+.chat-header-id {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.chat-header strong {
+  font-family: var(--font-condensed);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.92rem;
+  color: var(--cream);
+}
+
+.chat-header small {
+  font-family: var(--font-body);
+  font-style: italic;
+  color: var(--gold-light);
+}
+
+.chat-log {
+  background: transparent;
+}
+
+.chat-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.chat-row.user {
+  justify-content: flex-end;
+}
+
+.chat-avatar {
+  flex-shrink: 0;
+  margin-bottom: 2px;
+}
+
+.chat-bubble {
+  border-radius: 10px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.chat-bubble.assistant {
+  background: var(--cream);
+  border: 1px solid var(--paper-edge);
+  border-bottom-left-radius: 2px;
+}
+
+.chat-bubble.user {
+  background: var(--navy);
+  color: var(--cream);
+  border-bottom-right-radius: 2px;
+}
+
+.chat-bubble-in {
+  animation: bubble-in 0.3s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+}
+
+@keyframes bubble-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.97);
+  }
+}
+
+.chat-thinking {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.chat-suggestion {
+  font-family: var(--font-condensed);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--cream);
+  color: var(--navy);
+}
+
+.chat-suggestion:hover {
+  background: var(--gold-light);
+  border-color: var(--gold);
+}
+
+.chat-suggestions {
+  background: transparent;
+}
+
+.chat-form {
+  background: var(--cream);
+  border-top: 1px solid var(--paper-edge);
+}
+
+.chat-form input {
+  border-radius: 999px;
+  border-color: var(--line);
+  font-family: var(--font-body);
+}
+
+.chat-form button {
+  background: var(--crimson);
+  font-family: var(--font-condensed);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.chat-results-jump {
+  font-family: var(--font-condensed);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-color: var(--crimson);
+  color: var(--crimson);
+  background: rgba(150, 48, 31, 0.06);
+}
+
+/* --- chat results band -------------------------------------------------- */
+
+.chat-results {
+  background: var(--cream);
+  border: 1px solid var(--paper-edge);
+  border-radius: 2px;
+}
+
+.chat-results::before {
+  background: linear-gradient(180deg, var(--crimson) 0%, var(--gold) 100%);
+  border-radius: 0;
+}
+
+.chat-results-head h2 {
+  text-transform: uppercase;
+  font-size: 1.25rem;
+}
+
+.chat-results-query {
+  font-family: var(--font-body);
+  font-style: italic;
+}
+
+.chat-results-clear {
+  font-family: var(--font-condensed);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-radius: 2px;
+}
+
+/* --- game-day ticker ----------------------------------------------------- */
+
+.ticker {
+  position: relative;
+  background: var(--navy-dark);
+  border-bottom: 3px double var(--gold);
+  color: var(--paper);
+  overflow: hidden;
+}
+
+/* Fade the strip out at both ends so items enter and leave rather than appearing to be
+   clipped by the window edge. */
+.ticker::before,
+.ticker::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 60px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.ticker::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--navy-dark), transparent);
+}
+
+.ticker::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--navy-dark), transparent);
+}
+
+.ticker-rail {
+  display: flex;
+  width: max-content;
+  animation: ticker-run 42s linear infinite;
+}
+
+.ticker:hover .ticker-rail {
+  /* Pause so a visitor can actually read an item that caught their eye. */
+  animation-play-state: paused;
+}
+
+.ticker-item {
+  font-family: var(--font-condensed);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.74rem;
+  padding: 0.5rem 0;
+  white-space: nowrap;
+  color: rgba(246, 239, 223, 0.92);
+}
+
+.ticker-sep {
+  color: var(--gold);
+  padding: 0 1.4rem;
+}
+
+@keyframes ticker-run {
+  /* Exactly -50%: the rail holds two identical copies, so at the end of the cycle the
+     second copy sits precisely where the first began and the seam is invisible. */
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* --- hero bunting -------------------------------------------------------- */
+
+.bunting {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 54px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.bunting-rope {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.bunting-flags {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  padding: 0 1.5rem;
+}
+
+.pennant {
+  width: 26px;
+  height: 34px;
+  /* A triangle hanging from its top edge. */
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: 50% 0;
+  animation: pennant-sway 3.4s ease-in-out infinite;
+  opacity: 0.85;
+}
+
+@keyframes pennant-sway {
+  0%, 100% { transform: rotate(-4deg); }
+  50% { transform: rotate(4deg); }
+}
+
+/* --- scroll progress ----------------------------------------------------- */
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 60;
+  background: transparent;
+  pointer-events: none;
+}
+
+.scroll-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--crimson));
+  transform-origin: 0 50%;
+  /* Transform-only, so scrolling never triggers layout. */
+  will-change: transform;
+}
+
+/* --- confetti ------------------------------------------------------------ */
+
+.add-to-bag {
+  position: relative;
+}
+
+.confetti {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 8px;
+  height: 11px;
+  border-radius: 1px;
+  opacity: 0;
+  animation: confetti-fly 1.1s cubic-bezier(0.15, 0.65, 0.35, 1) forwards;
+}
+
+@keyframes confetti-fly {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0deg) scale(var(--scale));
+  }
+  /* Up and out first… */
+  35% {
+    opacity: 1;
+  }
+  100% {
+    /* …then down past the start, like paper thrown in the air. */
+    opacity: 0;
+    transform:
+      translate(var(--cx), calc(var(--rise) * -1 + 150px))
+      rotate(var(--spin))
+      scale(var(--scale));
+  }
+}
+
+/* --- Dan's eyes ---------------------------------------------------------- */
+
+.dan-eyes {
+  /* Catches up to the cursor over a beat rather than snapping, which reads as a glance
+     instead of a twitch. */
+  transition: transform 0.18s ease-out;
+}
+
+/* --- utility ------------------------------------------------------------- */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --- Dan, trotting across the page --------------------------------------- */
+
+.dan-trot-lane {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 80px;
+  z-index: 35;
+  overflow: hidden;
+  /* The lane is a window, not a wall — clicks pass through to the page except on Dan
+     himself, who re-enables them. */
+  pointer-events: none;
+}
+
+.dan-trot {
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  animation: dan-cross 27s linear infinite;
+}
+
+@keyframes dan-cross {
+  /* Crosses during the first ~44% of the cycle, then waits offscreen. The pause is the
+     point: he should be a surprise, not a treadmill. */
+  0% { transform: translateX(-180px); }
+  44% { transform: translateX(calc(100vw + 180px)); }
+  100% { transform: translateX(calc(100vw + 180px)); }
+}
+
+.dan-trot-hit {
+  pointer-events: auto;
+  position: relative;
+  display: block;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  line-height: 0;
+}
+
+.dan-side {
+  display: block;
+  filter: drop-shadow(0 3px 5px rgba(13, 27, 43, 0.28));
+}
+
+/* The whole body bobs twice per stride — once per leg pair hitting the ground. */
+.dan-side-body,
+.dan-head-side {
+  animation: dan-bob 0.23s ease-in-out infinite;
+}
+
+@keyframes dan-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+.dan-leg {
+  animation-duration: 0.46s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+/* Diagonal pairs move together, which is what a real trot looks like. */
+.dan-leg-a { animation-name: dan-stride-a; }
+.dan-leg-b { animation-name: dan-stride-b; }
+
+@keyframes dan-stride-a {
+  0%, 100% { transform: rotate(20deg); }
+  50% { transform: rotate(-20deg); }
+}
+
+@keyframes dan-stride-b {
+  0%, 100% { transform: rotate(-20deg); }
+  50% { transform: rotate(20deg); }
+}
+
+/* Tail and ear run on their own periods so nothing lands on the beat together —
+   synchronized secondary motion is what makes an animation look like a machine. */
+.dan-tail {
+  animation: dan-wag 0.31s ease-in-out infinite;
+}
+
+@keyframes dan-wag {
+  0%, 100% { transform: rotate(-14deg); }
+  50% { transform: rotate(16deg); }
+}
+
+.dan-ear-side {
+  animation: dan-ear-flop 0.52s ease-in-out infinite;
+}
+
+@keyframes dan-ear-flop {
+  0%, 100% { transform: rotate(-7deg); }
+  50% { transform: rotate(9deg); }
+}
+
+/* bark */
+.dan-bark {
+  position: absolute;
+  left: 92px;
+  top: -6px;
+  background: var(--cream);
+  color: var(--crimson);
+  border: 2px solid var(--ink);
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  line-height: 1;
+  padding: 0.38rem 0.6rem;
+  border-radius: 3px;
+  white-space: nowrap;
+  animation: bark-pop 1.4s ease-out forwards;
+}
+
+.dan-trot-hit.is-barking .dan-side {
+  animation: bark-recoil 0.3s ease-out;
+}
+
+@keyframes bark-pop {
+  0% { opacity: 0; transform: translateY(6px) scale(0.7); }
+  18% { opacity: 1; transform: translateY(0) scale(1.08); }
+  30% { transform: translateY(0) scale(1); }
+  80% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-8px); }
+}
+
+@keyframes bark-recoil {
+  0%, 100% { transform: translateX(0); }
+  40% { transform: translateX(-5px); }
+}
+
+/* --- pups peeking over the footer ---------------------------------------- */
+
+/* Sits directly above the footer and clips at its own bottom edge — which is exactly the
+   footer's top rail. A pup translated down is hidden by that edge, so he reads as ducking
+   back down behind the fence rather than as half a dog. */
+.dan-peek-row {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  height: 92px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.dan-peek {
+  position: absolute;
+  /* Anchored to the row's bottom edge, which is the footer's top rail. At rest he is
+     fully above it; the animation drops him behind it. */
+  bottom: 0;
+  display: block;
+  color: var(--dan-fur);
+  /* The fur is cream and so is the paper behind it, so without this the pups vanish into
+     the page above the footer. The shadow is what gives them an edge. */
+  filter: drop-shadow(0 3px 4px rgba(13, 27, 43, 0.38));
+  animation-name: dan-peek-bob;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.3, 1);
+  animation-iteration-count: infinite;
+}
+
+@keyframes dan-peek-bob {
+  /* translateY(100%) puts him entirely below the row's bottom edge, where overflow:hidden
+     clips him — so "down" really is gone, not a dog squatting on the rail. */
+  0%, 56% { transform: translateY(100%); }
+  68%, 88% { transform: translateY(18%); }
+  100% { transform: translateY(100%); }
+}
+
+.dan-peek-paws {
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 26px;
+}
+
+.dan-peek-paw {
+  width: 15px;
+  height: 10px;
+  border-radius: 7px 7px 2px 2px;
+  background: var(--dan-shade);
+}
+
+/* --- respect reduced motion --------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-dan,
+  .dan-sleeping .dan-ear,
+  .dan-zzz,
+  .dan-thinking,
+  .paw,
+  .page-transition,
+  .chat-bubble-in,
+  .ticker-rail,
+  .pennant,
+  .confetti-piece,
+  .dan-side-body,
+  .dan-head-side,
+  .dan-leg,
+  .dan-tail,
+  .dan-ear-side {
+    animation: none;
+  }
+
+  /* A dog sliding across the window with his legs frozen is worse than no dog, so the
+     whole lane goes rather than just its animation. The pups by the footer stay, parked
+     in the up position where they read as a static illustration. */
+  .dan-trot-lane {
+    display: none;
+  }
+
+  .dan-peek {
+    animation: none;
+    transform: translateY(18%);
+  }
+
+  /* The ticker still has to be readable with its animation off, so show the first copy
+     rather than a rail parked mid-scroll. */
+  .ticker-rail {
+    transform: none;
+  }
+
+  .confetti {
+    display: none;
+  }
+
+  .dan-eyes {
+    transition: none;
+  }
+
+  .reveal,
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  .product-card,
+  .product-card:hover {
+    transform: none;
+    transition: box-shadow 0.22s ease;
+  }
+
+  .product-card:hover .product-card-image img,
+  .detail-image:hover img {
+    transform: none;
+  }
+}
